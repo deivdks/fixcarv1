@@ -8,6 +8,7 @@ using fixcarv1.Models;
 namespace fixcarv1.Controllers
 {
     [ApiController]
+    [Route("v1/cars")]
     public class CarController : ControllerBase
     {
         [HttpGet]
