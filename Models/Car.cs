@@ -24,10 +24,10 @@ namespace fixcarv1.Models
         [Range(0, int.MaxValue, ErrorMessage ="Informe corretamente uma Km.")]
         public int Km{get;set;}
 
-        /*[Required(ErrorMessage ="É obrigatório  informar a fabricante do carro.")]
-        public Fabricante FabCarro{get; set;}
+        public int FabricanteCarroId{get;set;}
+        public Fabricante FabricanteCarro{get; set;}
 
-        public Transmissao Transmissao{get;set;}*/
+        /*public Transmissao Transmissao{get;set;}*/
 
     }
 

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using fixcarv1.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace fixcarv1
 {
@@ -31,6 +32,11 @@ namespace fixcarv1
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbConnectionString));
             services.AddScoped<DataContext, DataContext>();
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "teste", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +46,9 @@ namespace fixcarv1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ficcarv1 v1"));
 
             app.UseHttpsRedirection();
 
