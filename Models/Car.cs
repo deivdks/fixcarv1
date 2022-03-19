@@ -27,7 +27,7 @@ namespace fixcarv1.Models
         public int FabricanteCarroId{get;set;}
         public Fabricante FabricanteCarro{get; set;}
 
-        /*public Transmissao Transmissao{get;set;}*/
+        public Transmissao Transmissao{get;set;}
 
     }
 

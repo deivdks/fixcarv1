@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using fixcarv1.Enums;
 
 namespace fixcarv1.Models.Requests
 {
@@ -15,6 +16,7 @@ namespace fixcarv1.Models.Requests
         [Range(0, int.MaxValue, ErrorMessage = "Informe corretamente uma Km.")]
         public int Km { get; set; }
         public int FabricanteCarroId { get; set; }
+        public Transmissao Transmissao{get;set;}
 
     }
 }

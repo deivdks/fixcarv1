@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using fixcarv1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace fixcarv1
 {
@@ -31,7 +32,8 @@ namespace fixcarv1
             string dbConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbConnectionString));
             services.AddScoped<DataContext, DataContext>();
-            services.AddControllers();
+            services.AddControllers() 
+                    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddSwaggerGen(c =>
             {

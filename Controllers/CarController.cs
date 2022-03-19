@@ -29,6 +29,7 @@ namespace fixcarv1.Controllers
             car.Ano = request.Ano;
             car.Km = request.Km;
             car.FabricanteCarroId = request.FabricanteCarroId;
+            car.Transmissao = request.Transmissao;
 
             if (ModelState.IsValid)
             {
@@ -76,6 +77,7 @@ namespace fixcarv1.Controllers
             cardb.Ano = request.Ano;
             cardb.Km = request.Km;
             cardb.FabricanteCarroId = request.FabricanteCarroId;
+            cardb.Transmissao = request.Transmissao;
             context.Cars.Update(cardb);
             await context.SaveChangesAsync();
             return cardb;
