@@ -10,32 +10,29 @@ using fixcarv1.Models.Requests;
 namespace fixcarv1.Controllers
 {
     [ApiController]
-    [Route("v1/cars")]
-    public class CarController : ControllerBase
+    [Route("v1/fabricantes")]
+    public class FabricantesController : ControllerBase
     {
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Car>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Fabricante>>> Get([FromServices] DataContext context)
         {
-            return await context.Cars.AsNoTracking().ToListAsync();
+            return await context.Fabricantes.AsNoTracking().ToListAsync();
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Car>> Post([FromServices] DataContext context, [FromBody] AddCarRequest request)
+        public async Task<ActionResult<Fabricante>> Post([FromServices] DataContext context, [FromBody] AddFabricanteRequest request)
         {
-            var car = new Car();
-            car.Modelo = request.Modelo;
-            car.Ano = request.Ano;
-            car.Km = request.Km;
-            car.FabricanteCarroId = request.FabricanteCarroId;
-            car.Transmissao = request.Transmissao;
-
+            var fabricante = new Fabricante();
+            fabricante.Nome = request.Nome;
+            fabricante.PaisOrigemId = request.PaisOrigemId;
+            
             if (ModelState.IsValid)
             {
-                context.Cars.Add(car);
+                context.Fabricantes.Add(fabricante);
                 await context.SaveChangesAsync();
-                return car;
+                return fabricante;
             }
             else
             {
@@ -47,17 +44,17 @@ namespace fixcarv1.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult> Delete([FromServices] DataContext context, [FromRoute] int id)
         {
-            var car = await context.Cars.Where(c => c.Id == id).FirstOrDefaultAsync();
-            if (car == null)
+            var fabricante = await context.Fabricantes.Where(c => c.Id == id).FirstOrDefaultAsync();
+            if (fabricante == null)
             {
-                return BadRequest("Carro não encontrado");
+                return BadRequest("Fabricante não encontrado");
             }
-            context.Cars.Remove(car);
+            context.Fabricantes.Remove(fabricante);
             await context.SaveChangesAsync();
             return Ok();
         }
 
-
+//TODO:
         [HttpPut]
         [Route("{id:int}")]
         public async Task<ActionResult<Car>> Put([FromServices] DataContext context, [FromBody] UpdateCarRequest request, [FromRoute] int id)

@@ -11,6 +11,7 @@ namespace fixcarv1.Data
 
         public DbSet<Car> Cars{get;set;}
         public DbSet<Fabricante> Fabricantes{get;set;}
+        public DbSet<PaisOrigem> PaisOrigem{get;set;}
     
     }
 
