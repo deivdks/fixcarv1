@@ -22,7 +22,7 @@ namespace fixcarv1.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Fabricante>> Post([FromServices] DataContext context, [FromBody] AddFabricanteRequest request)
+        public async Task<ActionResult<Fabricante>> Post([FromServices] DataContext context, [FromBody] AddUpdateFabricanteRequest request)
         {
             var fabricante = new Fabricante();
             fabricante.Nome = request.Nome;
@@ -54,15 +54,15 @@ namespace fixcarv1.Controllers
             return Ok();
         }
 
-//TODO:
+
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<ActionResult<Car>> Put([FromServices] DataContext context, [FromBody] UpdateCarRequest request, [FromRoute] int id)
+        public async Task<ActionResult<Fabricante>> Put([FromServices] DataContext context, [FromBody] AddUpdateFabricanteRequest request, [FromRoute] int id)
         {
-            var cardb = await context.Cars.Where(c => c.Id == id).FirstOrDefaultAsync();
-            if (cardb == null)
+            var fabricantedb = await context.Fabricantes.Where(c => c.Id == id).FirstOrDefaultAsync();
+            if (fabricantedb == null)
             {
-                return BadRequest("Carro não encontrado");
+                return BadRequest("Fabricante não encontrado");
             }
 
             if (!ModelState.IsValid)
@@ -70,35 +70,12 @@ namespace fixcarv1.Controllers
                 return BadRequest(ModelState);
             }
 
-            cardb.Modelo = request.Modelo;
-            cardb.Ano = request.Ano;
-            cardb.Km = request.Km;
-            cardb.FabricanteCarroId = request.FabricanteCarroId;
-            cardb.Transmissao = request.Transmissao;
-            context.Cars.Update(cardb);
+            fabricantedb.Nome=request.Nome;
+            fabricantedb.PaisOrigemId=request.PaisOrigemId;
+            context.Fabricantes.Update(fabricantedb);
             await context.SaveChangesAsync();
-            return cardb;
+            return fabricantedb;
         }
 
-        [HttpPut]
-        [Route("km/{id:int}")]
-        public async Task<ActionResult<Car>> PutKm([FromServices] DataContext context, [FromBody] UpdateCarKmRequest request, [FromRoute] int id)
-        {
-            var cardb = await context.Cars.Where(c => c.Id == id).FirstOrDefaultAsync();
-            if (cardb == null)
-            {
-                return BadRequest("Carro não encontrado");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            cardb.Km = request.Km;
-            context.Cars.Update(cardb);
-            await context.SaveChangesAsync();
-            return cardb;
-        }
     }
 }
