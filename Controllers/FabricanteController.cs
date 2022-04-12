@@ -19,6 +19,26 @@ namespace fixcarv1.Controllers
         {
             return await context.Fabricantes.AsNoTracking().ToListAsync();
         }
+      
+        [HttpGet]
+        [Route("cars/{id:int}")]
+        public async Task<ActionResult<List<Car>>> GetCars([FromServices] DataContext context, int id)
+        {
+
+            return await context.Cars.Where(c => c.FabricanteCarroId == id).ToListAsync();   
+        }
+
+        [HttpGet]
+        [Route("carsfabricante/{id:int}")]
+        public async Task<ActionResult<Fabricante>> GetCarsFabricante([FromServices] DataContext context, int id)
+        {
+                                            //Include serve como uma espécie de JOIN com outra tabela (que esteja dentro da classe como objeto)
+            return await context.Fabricantes.Include(i => i.Carros)
+                                            .Where(i => 
+                                                i.Id  == id).FirstOrDefaultAsync();
+             
+        }
+
 
         [HttpPost]
         [Route("")]

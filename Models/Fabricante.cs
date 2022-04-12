@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-//using Swashbuckle.AspNetCore.Annotations;
 
 namespace fixcarv1.Models
 {
