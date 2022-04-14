@@ -15,6 +15,13 @@ namespace fixcarv1.Data.Mappers
                     t => (int)t,
                     t => (Transmissao)t
                 );
+
+          builder.HasOne(c => c.FabricanteCarro)
+                 .WithMany(c => c.Carros)
+                 .HasForeignKey(c => c.FabricanteCarroId)
+                 .OnDelete(DeleteBehavior.Restrict);
+          
+              
         }
     }
 }

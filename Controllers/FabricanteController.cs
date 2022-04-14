@@ -25,7 +25,9 @@ namespace fixcarv1.Controllers
         public async Task<ActionResult<List<Car>>> GetCars([FromServices] DataContext context, int id)
         {
 
-            return await context.Cars.Where(c => c.FabricanteCarroId == id).ToListAsync();   
+            return await context.Cars.Include(c => c.FabricanteCarro)
+                                     .Where(c => c.FabricanteCarroId == id).ToListAsync();   
+            
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace fixcarv1.Controllers
                                             //Include serve como uma espécie de JOIN com outra tabela (que esteja dentro da classe como objeto)
             return await context.Fabricantes.Include(i => i.Carros)
                                             .Where(i => 
-                                                i.Id  == id).FirstOrDefaultAsync();
+                                                   i.Id == id).FirstOrDefaultAsync();
              
         }
 
