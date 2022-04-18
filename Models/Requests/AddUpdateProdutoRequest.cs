@@ -12,11 +12,11 @@ namespace fixcarv1.Models.Requests
 
         [Required(ErrorMessage = "É preciso informar o preço do produto.")]
         [Range(0, float.MaxValue, ErrorMessage = "É preciso informar um valor correto ao preço do produto.")]
-        public float Preco { get; set; }
+        public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "É preciso informar de qual serviço é o produto.")]
         [Range(0, int.MaxValue, ErrorMessage = "É preciso informar um valor correto ao número do serviço.")]
-        public int ServidoId { get; set; }
+        public int ServicoId { get; set; }
         public TipoProduto TipoProduto { get; set; }
     }
 }

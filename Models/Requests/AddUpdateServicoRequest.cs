@@ -7,10 +7,6 @@ namespace fixcarv1.Models.Requests
     public class AddUpdateServicoRequest
     {
 
-        [Required(ErrorMessage = "É preciso informar o serviço efetuado.")]
-        [MinLength(3, ErrorMessage = "É preciso ter ao menos 3 caracteres informados.")]
-        public string ServicoEfetuado { get; set; }
-
         [Required(ErrorMessage = "É preciso informar a data do começo do serviço.")]
         public DateTime DataEntrada { get; set; }
 

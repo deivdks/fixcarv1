@@ -17,17 +17,13 @@ namespace fixcarv1.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "É preciso informar o serviço efetuado.")]
-        [MinLength(3, ErrorMessage = "É preciso ter ao menos 3 caracteres informados.")]
-        public string ServicoEfetuado { get; set; }
-
         [Required(ErrorMessage = "É preciso informar a data do começo do serviço.")]
         public DateTime DataEntrada { get; set; }
 
         [Required(ErrorMessage = "É preciso informar a data do fim do serviço.")]
         public DateTime DataEntrega { get; set; }
 
-        public float ValorTotal => Produtos.Sum(p => p.Preco);
+        public decimal ValorTotal => Produtos.Sum(p => p.Preco);
 
         [Required(ErrorMessage = "É preciso informar qual carro está no serviço.")]
         [Range(0, int.MaxValue, ErrorMessage = "Informe um valor correto para o carro.")]

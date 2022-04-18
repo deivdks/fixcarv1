@@ -27,7 +27,7 @@ namespace fixcarv1.Controllers
             var produto = new Produto();
             produto.Nome =request.Nome;
             produto.Preco=request.Preco;
-            produto.ServidoId=request.ServidoId;
+            produto.ServicoId=request.ServicoId;
             produto.TipoProduto=request.TipoProduto;
             
             if (ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace fixcarv1.Controllers
 
             produto.Nome =request.Nome;
             produto.Preco=request.Preco;
-            produto.ServidoId=request.ServidoId;
+            produto.ServicoId=request.ServicoId;
             produto.TipoProduto=request.TipoProduto;
             context.Produtos.Update(produto);
             await context.SaveChangesAsync();

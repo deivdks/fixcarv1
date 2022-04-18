@@ -13,7 +13,7 @@ namespace fixcarv1.Controllers
     [Route("v1/servicos")]
     public class ServicoController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet]   
         [Route("")]
         public async Task<ActionResult<List<Servico>>> Get([FromServices] DataContext context)
         {
@@ -25,7 +25,6 @@ namespace fixcarv1.Controllers
         public async Task<ActionResult<Servico>> Post([FromServices] DataContext context, [FromBody] AddUpdateServicoRequest request)
         {
             var servico = new Servico();
-            servico.ServicoEfetuado=request.ServicoEfetuado;
             servico.DataEntrada=request.DataEntrada;
             servico.DataEntrega=request.DataEntrega;
             servico.CarId=request.CarId;
@@ -83,7 +82,6 @@ namespace fixcarv1.Controllers
                 return BadRequest(ModelState);
             }
 
-            servico.ServicoEfetuado=request.ServicoEfetuado;
             servico.DataEntrada=request.DataEntrada;
             servico.DataEntrega=request.DataEntrega;
             servico.CarId=request.CarId;

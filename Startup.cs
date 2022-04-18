@@ -34,6 +34,11 @@ namespace fixcarv1
             services.AddScoped<DataContext, DataContext>();
             services.AddControllers() 
                     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            
+            
+            services.AddControllers().AddJsonOptions(x =>
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
 
             services.AddSwaggerGen(c =>
             {
